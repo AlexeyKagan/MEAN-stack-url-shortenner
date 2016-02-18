@@ -1,0 +1,89 @@
+<header>
+    <div class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="/profile" class="navbar-brand"><span class="glyphicon glyphicon-fire text-danger"></span> Url
+                    Shortenner:</a>
+            </div>
+
+            <ul class="nav navbar-nav navbar-right">
+
+                <li class="navbar-text">Hello <%= user.name %></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<main class="container">
+
+    <h2>Url shortenner:</h2>
+
+    <form ng-submit="main.getShortUrl()">
+        <input type="url" placeholder="INSERT YOUR LONG URL HERE" class="form-control" ng-model="main.longUrl"> <br>
+        <input type="text" placeholder="WRITE DESCRIPTION" class="form-control" ng-model="main.description"> <br>
+        <input type="text" placeholder="WRITE TAGS" class="form-control" ng-model="main.tags"> <br>
+
+        <button type="submit" class="btn btn-primary" class="form-control">url shortner
+        </button>
+
+    </form>
+
+
+    <p ng-show="main.shortUrl" class="short-text">
+        Short url <i class="glyphicon glyphicon-chevron-right"></i>
+        <i class="glyphicon glyphicon-chevron-right"></i>
+        <input type="text" readonly="readonly" value="{{main.shortUrl}}" class="past-short-url" onclick="this.select()"><br/>
+
+        About this link <i class="glyphicon glyphicon-chevron-right"></i>
+        <i class="glyphicon glyphicon-chevron-right"></i>
+        <input type="text" readonly="readonly" value="{{main.aboutLink}}" class="past-short-url" onclick="this.select()">
+
+    </p>
+
+
+    <br/>
+    <table class="table table-hover adaptive-table">
+        <tr>
+
+            <th> LONGURL</th>
+            <th> SHORTURL</th>
+            <th> DESCRIPTION</th>
+            <th> TAGS</th>
+            <th> CLICKS</th>
+            <th> ABOUT</th>
+            <th> CHANGE</th>
+            <th> DELETE</th>
+        </tr>
+
+        <tr ng-repeat="link in linkz" ng-if="link.urlz.longurl">
+
+            <td class="s"> {{link.urlz.longurl}}</td>
+            <td><a href="{{link.urlz.shorturl}}"> localhost:8080/{{link.urlz.shorturl}} </a></td>
+
+            <td> {{link.urlz.description}}</td>
+            <td> #{{link.urlz.tags}}</td>
+
+            <td> {{link.urlz.clicks}}</td>
+            <td><a href="/about/{{link.urlz.shorturl}}"> details </a></td>
+            <td><a href="/profile/{{link._id}}" class="btn btn-success">Change</a></td>
+            <td>
+                <button ng-click="delete(link._id)" class="btn btn-primary">Delete</button>
+            </td>
+
+        </tr>
+
+    </table>
+
+    <div class="row show-hide-message" ng-show="message">
+        <div class="col-sm-6 col-sm-offset-2">
+
+            <div class="alert alert-info">
+                {{ message }}
+            </div>
+
+        </div>
+    </div>
+
+
+</main>

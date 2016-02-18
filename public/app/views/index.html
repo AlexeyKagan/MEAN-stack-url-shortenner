@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="shortUrl">
+<head>
+    <meta charset="UTF-8">
+    <title>Url shortenner</title>
+    <!-- viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+    <!-- FOR ANGULAR ROUTING -->
+    <base href="/">
+    
+    <!-- CSS  -->
+    <!-- load bootstrap from CDN and custom CSS -->      
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.1/paper/bootstrap.min.css">
+    
+    <!-- JS -->
+    <!-- load angular and angular-route via CDN -->
+    <script src="https://code.angularjs.org/1.5.0/angular.min.js"></script>    
+    <script src="http://angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>
+    
+
+    <!-- controllers -->
+    <script src="app/controllers/mainCtrl.js"></script>
+    <script src="app/controllers/auth/loginCtrl.js"></script>
+    <script src="app/controllers/auth/signupCtrl.js"></script>
+    <script src="app/controllers/redirectCtrl.js"></script>
+    <script src="app/controllers/auth/authCtrl.js"></script>
+    
+    <!-- services -->
+    <script src="app/services/authService.js"></script>
+    <script src="app/services/appService.js"></script>
+
+
+    <!-- main Angular app files -->
+    
+    <script src="app/app.routes.js"></script>
+    <script src="app/app.js"></script>
+    
+    
+</head>
+
+<body >
+
+    <!-- ANGULAR VIEWS -->   
+   <div ui-view></div>
+
+
+</body>
+</html>
