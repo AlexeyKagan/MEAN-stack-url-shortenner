@@ -11,6 +11,15 @@ angular.module('appService', [])
                 tags: tags
             })
         };
+        
+        appFactory.getUrls = () => {
+            return $http.get('/api/getUrls');
+            
+        };
+        
+        appFactory.aboutUrl = (id) => {
+            return $http.get('/api/about/' + id)
+        };
 
         return appFactory;
 

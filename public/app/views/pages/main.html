@@ -56,16 +56,16 @@
             <th> DELETE</th>
         </tr>
 
-        <tr ng-repeat="link in linkz" ng-if="link.urlz.longurl">
+        <tr ng-repeat="link in main.linkz" >
 
-            <td class="s"> {{link.urlz.longurl}}</td>
-            <td><a href="{{link.urlz.shorturl}}"> localhost:8080/{{link.urlz.shorturl}} </a></td>
+            <td class="s"> {{link.longUrl}}</td>
+            <td><a href="{{link.shortUrl}}"> localhost:8080/{{link.shortUrl}} </a></td>
 
-            <td> {{link.urlz.description}}</td>
-            <td> #{{link.urlz.tags}}</td>
+            <td> {{link.description}}</td>
+            <td> #{{link.tags}}</td>
 
-            <td> {{link.urlz.clicks}}</td>
-            <td><a href="/about/{{link.urlz.shorturl}}"> details </a></td>
+            <td> {{link.clicks}}</td>
+            <td><a href="/about/{{link.shortUrl}}"> details </a></td>
             <td><a href="/profile/{{link._id}}" class="btn btn-success">Change</a></td>
             <td>
                 <button ng-click="delete(link._id)" class="btn btn-primary">Delete</button>
@@ -84,6 +84,7 @@
 
         </div>
     </div>
+    
 
 
 </main>

@@ -118,20 +118,37 @@ module.exports = (express) => {
             success: true
         })
     });
+    apiRouter.get('/getUrls', (req, res) => {
+        url.find({}, function (err, result) {
+            if (err) res.send(err);
+            //console.log(result);
+            res.json(result);
+
+        });
+    });
+    apiRouter.get('/about/:id', (req, res) => {
+        url.find({'shortUrl': req.params.id}, function (err, result) {
+            if (err) res.send(err);
+            res.json(result);
+            
+        })
+    });
 
     apiRouter.get('/:id', (req, res) => {
         console.log(req.params.id);
         url.findOne({'shortUrl': req.params.id}, function (err, rez) {
             if (err) res.json(err);
-            console.log(rez);
+            // console.log(rez);
             if (rez == null) res.json({a: 'bug'});
-
-            else res.json({a: rez.longUrl});
+            else {
+                rez.clicks++;
+                rez.save();
+                res.json({a: rez.longUrl});
+            }
 
         })
 
     });
-
 
 
     apiRouter.get('/me', (req, res) => {

@@ -1,20 +1,20 @@
 angular.module('app.routes', ['ui.router']) //angular routes
-    .config(['$stateProvider','$urlRouterProvider','$locationProvider', function ($stateProvider, $urlRouterProvider,$locationProvider) {
+    .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
         $stateProvider
             .state('main', {
-                url:'/',
+                url: '/',
                 templateUrl: 'app/views/pages/main.html',
-                controller:'mainController',
+                controller: 'mainController',
                 controllerAs: 'main'
             })
-            
+
             .state('login', {
                 url: '/login',
                 templateUrl: 'app/views/pages/auth/login.html',
                 controller: 'loginController',
                 controllerAs: 'login'
             })
-            
+
             .state('signup', {
                 url: '/signup',
                 templateUrl: 'app/views/pages/auth/signup.html',
@@ -22,10 +22,12 @@ angular.module('app.routes', ['ui.router']) //angular routes
                 controllerAs: 'signup'
             })
             
+            //REDIRECT
+            
             .state('redir', {
-                url: '/:id',                
-                controller : function($window,$http,$stateParams){
-                    
+                url: '/:id',
+                controller: function ($window, $http, $stateParams) {
+
                     $http.get('/api/' + $stateParams.id).then(function (data) {
                         console.log(data);
                         console.log(data.data.a);
@@ -35,16 +37,23 @@ angular.module('app.routes', ['ui.router']) //angular routes
                         else $window.location.href = data.data.a;
 
                     })
-                }         
-            });
-            $urlRouterProvider.otherwise('/');
+                }
+            })
             
-        
-        $locationProvider.html5Mode(true);
-        //$urlRouterProvider.html5Mode(true);
-    }]);
+            .state('AboutUrl', {
+                url: '/about/:id',
+                templateUrl: 'app/views/pages/AboutUrl.html',
+                controller : 'aboutController',
+                controllerAs: 'about'
+            });
 
-    
+
+        $urlRouterProvider.otherwise('/');
+
+
+        $locationProvider.html5Mode(true);
+        
+    }]);
 
 
 console.log('app.routes');
