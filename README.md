@@ -16,6 +16,7 @@
 	- open mongodb server on port: 27017
 	- type "gulp"
 <h4> Test </h4>
+	- mocha, supertest
 	- comming soon.
 
 
