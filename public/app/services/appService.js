@@ -11,16 +11,30 @@ angular.module('appService', [])
                 tags: tags
             })
         };
-        
+
         appFactory.getUrls = () => {
             return $http.get('/api/getUrls');
-            
+
         };
-        
+
         appFactory.aboutUrl = (id) => {
             return $http.get('/api/about/' + id)
         };
 
+        appFactory.ChangeAboutUrl = (id) => {
+            return $http.get('/api/change/' + id)
+        };
+
+        appFactory.AboutUpdate = (id, description, tags) => {
+            return $http.put('/api/change/' + id, {
+                description: description,
+                tags : tags
+            })
+        };
+        appFactory.deleteUrl = (id) => {
+            return $http.delete('/api/delete/'+id)
+        };
+        
         return appFactory;
 
     }]);

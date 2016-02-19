@@ -1,4 +1,5 @@
 angular.module('mainCtrl', [])
+    //####### mainController for create shorturl ######
     .controller('mainController', ['auth', '$location', 'appFactory', '$http', '$window', function (auth, $location, appFactory, $http, $window) {
         var vm = this;
 
@@ -27,12 +28,26 @@ angular.module('mainCtrl', [])
             appFactory.getUrls().success(function (data) {
                 vm.linkz = data;
             });
+            vm.aboutLink = "localhost:8080/about/" + short;
         };
         //get all urls
         appFactory.getUrls().success(function (data) {
             console.log(data);
             vm.linkz = data;
         });
+        
+        //DELETE URL
+        vm.delete = (id) => {
+            appFactory.deleteUrl(id).success(function(data){
+                
+                vm.message = data.message;
+            });
+            appFactory.getUrls().success(function(data){
+                vm.linkz = data;
+            })
+            
+        };
+       // appFactory.deleteUrl()
 
     }])
 
@@ -42,8 +57,25 @@ angular.module('mainCtrl', [])
         
         appFactory.aboutUrl($stateParams.id).success(function(data){
             vm.urlAbout = data;
+            console.log(vm.urlAbout)
         })
+    }])
+    
+    //####### change controller ############//
+    .controller('changeController', ['$stateParams', 'appFactory', function ($stateParams, appFactory) {
+        var vm = this;
+
+        appFactory.ChangeAboutUrl($stateParams.id).success(function(data){
+            vm.urlAbout = data;
+            console.log(vm.urlAbout)
+        });
         
+        //update
+        vm.change = () => {
+            appFactory.AboutUpdate($stateParams.id, vm.description, vm.tags).success(function (data) {
+                vm.message = data.message;
+            });
+        }
         
     }]);
 

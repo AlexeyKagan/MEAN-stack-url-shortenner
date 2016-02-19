@@ -66,9 +66,9 @@
 
             <td> {{link.clicks}}</td>
             <td><a href="/about/{{link.shortUrl}}"> details </a></td>
-            <td><a href="/profile/{{link._id}}" class="btn btn-success">Change</a></td>
+            <td><a href="/change/{{link._id}}" class="btn btn-success">Change</a></td>
             <td>
-                <button ng-click="delete(link._id)" class="btn btn-primary">Delete</button>
+                <button ng-click="main.delete(link._id)" class="btn btn-primary">Delete</button>
             </td>
 
         </tr>

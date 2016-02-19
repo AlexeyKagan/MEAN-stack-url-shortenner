@@ -13,7 +13,7 @@ var secret = config.secret;
 module.exports = (express) => {
 
     var apiRouter = express.Router();
-
+    //authentication
     apiRouter.post('/login', (req, res) => {
 
         User.findOne({username: req.body.username})
@@ -45,7 +45,7 @@ module.exports = (express) => {
                 }
             })
     });
-
+    //Registration
     apiRouter.post('/signup', (req, res) => {
         User.findOne({username: req.body.username}, (err, user) => {
             if (err) res.json(err);
@@ -100,7 +100,7 @@ module.exports = (express) => {
             });
         }
     });
-
+    //create short url
     apiRouter.post('/createShort', (req, res) => {
         var short = new url();
 
@@ -118,6 +118,7 @@ module.exports = (express) => {
             success: true
         })
     });
+    //get all urls
     apiRouter.get('/getUrls', (req, res) => {
         url.find({}, function (err, result) {
             if (err) res.send(err);
@@ -126,14 +127,52 @@ module.exports = (express) => {
 
         });
     });
+    //route for about url
     apiRouter.get('/about/:id', (req, res) => {
-        url.find({'shortUrl': req.params.id}, function (err, result) {
+        url.findOne({'shortUrl': req.params.id}, function (err, result) {
             if (err) res.send(err);
+            if (result == null) return res.send("Page not found.");
+            console.log(result);
             res.json(result);
+
+        })
+    });
+    //route for change url
+    apiRouter.route('/change/:id')
+        .get((req, res) => {
+            url.findById(req.params.id, function (err, result) {
+                if (err) res.send(err);
+                if (result == null) return res.send("Page not found.");
+                console.log(result);
+                res.json(result);
+
+            })
+        })
+        //UPDATE URL TAGS AND DESCRIPTION
+        .put((req, res) => {
+            url.findById(req.params.id, function (err, result) {
+                if (err) res.send(err);
+
+                if (req.body.description) result.description = req.body.description;
+                if (req.body.tags) result.tags = req.body.tags;
+
+                result.save(function (err) {
+                    res.json({message: 'success updated'})
+                });
+            })
+        });
+
+    //DELETE URL
+    apiRouter.delete('/delete/:id', (req, res) => {
+        url.remove({_id : req.params.id}, function(err,result){
+            if (err) res.send(err);
             
+            res.json({message : 'Success deleted'})
         })
     });
 
+
+    //get long url and after redirect
     apiRouter.get('/:id', (req, res) => {
         console.log(req.params.id);
         url.findOne({'shortUrl': req.params.id}, function (err, rez) {

@@ -31,11 +31,8 @@ angular.module('app.routes', ['ui.router']) //angular routes
                     $http.get('/api/' + $stateParams.id).then(function (data) {
                         console.log(data);
                         console.log(data.data.a);
-
                         if (data.data.a == 'bug') $window.location.href = '/';
-
                         else $window.location.href = data.data.a;
-
                     })
                 }
             })
@@ -45,6 +42,12 @@ angular.module('app.routes', ['ui.router']) //angular routes
                 templateUrl: 'app/views/pages/AboutUrl.html',
                 controller : 'aboutController',
                 controllerAs: 'about'
+            })
+            .state('changeUrl', {
+                url: '/change/:id', 
+                templateUrl: 'app/views/pages/changeUrl.html',
+                controller : 'changeController',
+                controllerAs: 'change'
             });
 
 
