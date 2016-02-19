@@ -1,5 +1,6 @@
 
-# MEAN-Url-shortenner 
+# MEAN-stack-Url-shortenner
+# Rebuild my old url shortenner with mean stack.
 
 <h4> Using:</h4>
 	- Mongodb 
@@ -14,6 +15,8 @@
 	- npm install
 	- open mongodb server on port: 27017
 	- type "gulp"
+<h4> Test </h4>
+	- comming soon.
 
 
 
