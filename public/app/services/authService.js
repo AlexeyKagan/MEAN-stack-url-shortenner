@@ -66,6 +66,7 @@ angular.module('authService', [])
 
         interceptorFactory.request = function (config) {
             var token = authToken.getToken();
+            
             if (token)
                 config.headers['x-access-token'] = token;
             return config;
@@ -79,6 +80,8 @@ angular.module('authService', [])
 
             return $q.reject(response);
         };
+        
+        
         return interceptorFactory;
     });
 

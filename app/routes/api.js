@@ -5,15 +5,13 @@ var url = require('../models/url');
 var secret = config.secret;
 
 
-/* 
- module.exports = function(app,express){
- };
- */
+
 
 module.exports = (express) => {
 
     var apiRouter = express.Router();
-    //authentication
+    
+    
     apiRouter.post('/login', (req, res) => {
 
         User.findOne({username: req.body.username})
@@ -25,7 +23,7 @@ module.exports = (express) => {
                     message: 'User with this username not found.'
                 });
                 else if (user) {
-                    //var validPassword = req.body.password; //willbe method for hash password
+                    //var validPassword = req.body.password; //willbe method for hash password comming soon.
                     if (req.body.password == user.password) {
                         res.json({
                             success: true,
@@ -73,6 +71,23 @@ module.exports = (express) => {
 
         })
     });
+    //get long url and after redirect
+    apiRouter.get('/:id', (req, res, next) => {
+        console.log(req.params.id);
+        url.findOne({'shortUrl': req.params.id}, function (err, rez) {
+            if (err) res.json(err);
+            //console.log(rez);
+            if (rez == null) next(); //res.json({a: 'bug'});
+            else {
+                rez.clicks++;
+                rez.save();
+                res.json({a: rez.longUrl});
+            }
+
+        })
+
+    });
+
     // verify a token
     apiRouter.use(function (req, res, next) {
         console.log('Somebody just came to our app');
@@ -100,6 +115,7 @@ module.exports = (express) => {
             });
         }
     });
+   
     //create short url
     apiRouter.post('/createShort', (req, res) => {
         var short = new url();
@@ -172,23 +188,8 @@ module.exports = (express) => {
     });
 
 
-    //get long url and after redirect
-    apiRouter.get('/:id', (req, res) => {
-        console.log(req.params.id);
-        url.findOne({'shortUrl': req.params.id}, function (err, rez) {
-            if (err) res.json(err);
-            // console.log(rez);
-            if (rez == null) res.json({a: 'bug'});
-            else {
-                rez.clicks++;
-                rez.save();
-                res.json({a: rez.longUrl});
-            }
-
-        })
-
-    });
-
+    
+  
 
     apiRouter.get('/me', (req, res) => {
         res.send(req.decoded);

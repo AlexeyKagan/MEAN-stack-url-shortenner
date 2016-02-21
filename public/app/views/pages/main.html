@@ -8,8 +8,8 @@
 
             <ul class="nav navbar-nav navbar-right">
 
-                <li class="navbar-text">Hello <%= user.name %></li>
-                <li><a href="/logout">Logout</a></li>
+                <li class="navbar-text">Hello {{main.user.data.username}}</li>
+                <li><a href="#" ng-click="main.doLogout()">Logout</a></li>
             </ul>
         </div>
     </div>

@@ -1,2 +1,23 @@
+</br>
+</br>
+</br>
 
-<h1>{{about.urlAbout}}   </h1>
+<h1>About url:</h1>
+
+
+<ul ng-repeat="link in about">
+    <li>Clicks: {{link.clicks}}</li>
+    <li>shortUrl:localhost:8080\{{link.shortUrl}}</li>
+    <li>longUrl : {{link.longUrl}}</li>
+    <li>
+       Tags: {{link.tags}}
+    </li>
+    <li>Description: {{link.description}}</li>
+    
+   
+</ul>
+
+<h3>Url object</h3>
+<p>
+    {{about.urlAbout}}
+</p>

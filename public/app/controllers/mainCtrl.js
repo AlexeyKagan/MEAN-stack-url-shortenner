@@ -8,8 +8,17 @@ angular.module('mainCtrl', [])
             $location.path('/login');
 
         auth.getUser().then((data)=> {
+            console.log(data);
             vm.user = data;
         });
+        
+        vm.doLogout = () => {
+            auth.doLogout();
+            $location.path('/login');
+        };
+        
+        
+        
         //if submit create short url
         vm.getShortUrl = () => {
             var short = makeId();
@@ -79,7 +88,7 @@ angular.module('mainCtrl', [])
         
     }]);
 
-
+//make random id for short url
 function makeId() {
     var text = "";
     var str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

@@ -22,17 +22,28 @@ angular.module('app.routes', ['ui.router']) //angular routes
                 controllerAs: 'signup'
             })
             
-            //REDIRECT
-            
+            //########REDIRECT to long url here            
             .state('redir', {
                 url: '/:id',
-                controller: function ($window, $http, $stateParams) {
-
-                    $http.get('/api/' + $stateParams.id).then(function (data) {
+                controller: function ($window, $http, $stateParams, $location) {
+                    var vm = this;
+                    //$http.default.headers.get('x-access-token');
+                    //$http.headers.get('x-access-token');
+                    //$http.get('/api/me');
+                    
+                    /*$http.get('/api/' + $stateParams.id).then(function (data) {
                         console.log(data);
-                        console.log(data.data.a);
-                        if (data.data.a == 'bug') $window.location.href = '/';
-                        else $window.location.href = data.data.a;
+                        console.log(data.data);
+                        if (data.data == undefined || data.data == null) return $location.path('/login');
+                        else
+                        $window.location.href = data.data.a;
+                    })
+                    */
+                    $http.get('/api/' + $stateParams.id).success(function (data) {
+                        // a - longurl
+                        if (!data.a) return false;                         
+                        else
+                            $window.location.href = data.a;
                     })
                 }
             })
