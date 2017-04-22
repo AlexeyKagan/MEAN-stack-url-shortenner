@@ -4,14 +4,9 @@ var User = require('../models/user');
 var url = require('../models/url');
 var secret = config.secret;
 
-
-
-
 module.exports = (express) => {
-
     var apiRouter = express.Router();
-    
-    
+
     apiRouter.post('/login', (req, res) => {
 
         User.findOne({username: req.body.username})
@@ -187,14 +182,9 @@ module.exports = (express) => {
         })
     });
 
-
-    
-  
-
     apiRouter.get('/me', (req, res) => {
         res.send(req.decoded);
     });
-
 
     return apiRouter;
 };

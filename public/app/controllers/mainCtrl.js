@@ -1,7 +1,6 @@
 angular.module('mainCtrl', [])
-    //####### mainController for create shorturl ######
-    .controller('mainController', ['auth', '$location', 'appFactory', '$http', '$window', function (auth, $location, appFactory, $http, $window) {
-        var vm = this;
+    .controller('mainController', ['auth', '$location', 'appFactory', '$http', '$window', function (auth, $location, appFactory) {
+        const vm = this;
 
         //check if user is logged in
         if (!auth.isLoggedIn())
@@ -15,13 +14,11 @@ angular.module('mainCtrl', [])
         vm.doLogout = () => {
             auth.doLogout();
             $location.path('/login');
-        };
-        
-        
-        
+        };       
+       
         //if submit create short url
         vm.getShortUrl = () => {
-            var short = makeId();
+            const short = makeId();
 
             if (vm.longUrl) { //if longurl is not empty then create short url
 
@@ -62,7 +59,7 @@ angular.module('mainCtrl', [])
 
     //############ GET ABOUT URL ############//
     .controller('aboutController', ['$stateParams', 'appFactory', function ($stateParams, appFactory) {
-        var vm = this;
+        const vm = this;
         
         appFactory.aboutUrl($stateParams.id).success(function(data){
             vm.urlAbout = data;
@@ -72,7 +69,7 @@ angular.module('mainCtrl', [])
     
     //####### change controller ############//
     .controller('changeController', ['$stateParams', 'appFactory', function ($stateParams, appFactory) {
-        var vm = this;
+        const vm = this;
 
         appFactory.ChangeAboutUrl($stateParams.id).success(function(data){
             vm.urlAbout = data;
@@ -90,15 +87,13 @@ angular.module('mainCtrl', [])
 
 //make random id for short url
 function makeId() {
-    var text = "";
-    var str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let text = "";
 
-    for (var i = 0; i < 6; i++) {
+  for (let i = 0; i < 6; i++) {
 
-        text += str.charAt(Math.floor(Math.random() * str.length))
-    }
-    return text;
+      text += str.charAt(Math.floor(Math.random() * str.length))
+  }
 
+  return text;
 }
-
-console.log('mainCtrl');

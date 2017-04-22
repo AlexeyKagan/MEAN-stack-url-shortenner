@@ -29,7 +29,6 @@
 
     </form>
 
-
     <p ng-show="main.shortUrl" class="short-text">
         Short url <i class="glyphicon glyphicon-chevron-right"></i>
         <i class="glyphicon glyphicon-chevron-right"></i>
@@ -40,12 +39,9 @@
         <input type="text" readonly="readonly" value="{{main.aboutLink}}" class="past-short-url" onclick="this.select()">
 
     </p>
-
-
     <br/>
     <table class="table table-hover adaptive-table">
         <tr>
-
             <th> LONGURL</th>
             <th> SHORTURL</th>
             <th> DESCRIPTION</th>
@@ -57,7 +53,6 @@
         </tr>
 
         <tr ng-repeat="link in main.linkz" >
-
             <td class="s"> {{link.longUrl}}</td>
             <td><a href="{{link.shortUrl}}"> localhost:8080/{{link.shortUrl}} </a></td>
 
@@ -70,9 +65,7 @@
             <td>
                 <button ng-click="main.delete(link._id)" class="btn btn-primary">Delete</button>
             </td>
-
         </tr>
-
     </table>
 
     <div class="row show-hide-message" ng-show="message">
@@ -84,7 +77,4 @@
 
         </div>
     </div>
-    
-
-
 </main>

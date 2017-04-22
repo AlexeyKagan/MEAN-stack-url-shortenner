@@ -1,6 +1,6 @@
 angular.module('authService', [])
     .factory('auth', ['$http', 'authToken', '$q', ($http, authToken, $q) => {
-        var authFactory = {};
+        const authFactory = {};
 
         authFactory.doLogin = (username, password) => {
             return $http.post('/api/login', {
@@ -40,7 +40,7 @@ angular.module('authService', [])
 
     }])
     .factory('authToken', ['$window', ($window) => {
-        var authToken = {};
+        const authToken = {};
 
         authToken.getToken = () => {
             return $window.localStorage.getItem('token');
@@ -62,10 +62,10 @@ angular.module('authService', [])
     // application configuration to integrate token into requests
     // ===================================================
     .factory('AuthInterceptor', function ($q, $location, authToken) {
-        var interceptorFactory = {};
+        const interceptorFactory = {};
 
         interceptorFactory.request = function (config) {
-            var token = authToken.getToken();
+            const token = authToken.getToken();
             
             if (token)
                 config.headers['x-access-token'] = token;
@@ -84,5 +84,3 @@ angular.module('authService', [])
         
         return interceptorFactory;
     });
-
-console.log('authService');

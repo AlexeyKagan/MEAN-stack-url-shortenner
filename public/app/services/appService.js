@@ -1,6 +1,6 @@
 angular.module('appService', [])
     .factory('appFactory', ['$http', function ($http) {
-        var appFactory = {};
+        const appFactory = {};
 
         //###### CREATE SHORT URL #############
         appFactory.createShortUrl = (longUrl, shortUrl, description, tags) => {
@@ -38,6 +38,3 @@ angular.module('appService', [])
         return appFactory;
 
     }]);
-
-
-console.log('appService.js');

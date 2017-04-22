@@ -4,7 +4,6 @@ var sass = require('gulp-sass');
 var concat     = require('gulp-concat');
 var nodemon    = require('gulp-nodemon');
 
-
 gulp.task('sass', function() {  
   gulp.src('public/assets/sass/*')
     .pipe(sass())
@@ -16,7 +15,6 @@ gulp.task('watch', function() {
 
   gulp.watch('public/assets/sass/*.scss', ['sass']);
 
- 
   //gulp.watch(['server.js', 'public/app/*.js', 'public/app/**/*.js']);
 });
 

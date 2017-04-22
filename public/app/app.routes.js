@@ -21,24 +21,10 @@ angular.module('app.routes', ['ui.router']) //angular routes
                 controller: 'signupController',
                 controllerAs: 'signup'
             })
-            
-            //########REDIRECT to long url here            
+
             .state('redir', {
                 url: '/:id',
-                controller: function ($window, $http, $stateParams, $location) {
-                    var vm = this;
-                    //$http.default.headers.get('x-access-token');
-                    //$http.headers.get('x-access-token');
-                    //$http.get('/api/me');
-                    
-                    /*$http.get('/api/' + $stateParams.id).then(function (data) {
-                        console.log(data);
-                        console.log(data.data);
-                        if (data.data == undefined || data.data == null) return $location.path('/login');
-                        else
-                        $window.location.href = data.data.a;
-                    })
-                    */
+                controller: function ($window, $http, $stateParams) {
                     $http.get('/api/' + $stateParams.id).success(function (data) {
                         // a - longurl
                         if (!data.a) return false;                         
@@ -54,6 +40,7 @@ angular.module('app.routes', ['ui.router']) //angular routes
                 controller : 'aboutController',
                 controllerAs: 'about'
             })
+
             .state('changeUrl', {
                 url: '/change/:id', 
                 templateUrl: 'app/views/pages/changeUrl.html',
@@ -61,13 +48,7 @@ angular.module('app.routes', ['ui.router']) //angular routes
                 controllerAs: 'change'
             });
 
-
         $urlRouterProvider.otherwise('/');
 
-
         $locationProvider.html5Mode(true);
-        
     }]);
-
-
-console.log('app.routes');

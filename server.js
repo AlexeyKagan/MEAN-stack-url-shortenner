@@ -4,9 +4,7 @@ var bodyParser = require('body-parser'); 	// get body-parser
 var morgan     = require('morgan'); 		// used to see requests
 var mongoose   = require('mongoose');
 var config 	   = require('./config');
-var path 	   = require('path');
-
-
+var path 	     = require('path');
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
@@ -23,7 +21,6 @@ app.use(morgan('dev'));
 mongoose.connect(config.database);
 
 app.use(express.static(__dirname + '/public'));
-
 
 //routes
 var apiRoutes = require('./app/routes/api')(express);
